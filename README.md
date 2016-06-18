@@ -1,2 +1,2 @@
 # TRAMS
-TRAMS - 
+TRAMS - Training Management Systems
