@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title><?php echo $title ; ?></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+ <link rel="stylesheet" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">	
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+ 
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ <script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+ <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ 
+ <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/additional-methods.min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/bootstrap-typeahead.js"></script>
+<script type="text/javascript"> BASE_URL = '<?php echo base_url(); ?>';</script>
+
+<!-- Bootstrap Date-Picker Plugin -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+
+  
+  <style>
+ .navbar-inverse { background-color: #428BCA}
+.navbar-inverse .navbar-nav>.active>a:hover,.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { background-color: #70B8FF}
+.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { background-color: #14ADDB}
+.dropdown-menu { background-color: #FFFFFF}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-color: #428BCA}
+.navbar-inverse { background-image: none; }
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { background-image: none; }
+.navbar-inverse { border-color: #DAEDE6}
+.navbar-inverse .navbar-brand { color: #FFFFFF}
+.navbar-inverse .navbar-brand:hover { color: #FFFFFF}
+.navbar-inverse .navbar-nav>li>a { color: #FFFFFF}
+.navbar-inverse .navbar-nav>li>a:hover, .navbar-inverse .navbar-nav>li>a:focus { color: #F5F5F5}
+.navbar-inverse .navbar-nav>.active>a,.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus { color: #FFFFFF}
+.navbar-inverse .navbar-nav>.active>a:hover, .navbar-inverse .navbar-nav>.active>a:focus { color: #FFFFFF}
+.dropdown-menu>li>a { color: #333333}
+.dropdown-menu>li>a:hover, .dropdown-menu>li>a:focus { color: #FFFFFF}
+.navbar-inverse .navbar-nav>.dropdown>a .caret { border-top-color: #428BCA}
+.navbar-inverse .navbar-nav>.dropdown>a .caret { border-bottom-color: #428BCA}
+.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-top-color: #FFFFFF}
+.navbar-inverse .navbar-nav>.dropdown>a:hover .caret { border-bottom-color: #FFFFFF}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a:focus{
+    color: #428BCA;
+    background-color: #F5F5F5;  
+} 
+
+  </style>
+</head>
+<body>
+<header class="navbar navbar-inverse navbar-fixed-top bs-docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="<?php echo base_url('ticket/dashboard');?>" class="navbar-brand">TesNow</a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="<?php echo base_url('ticket');?>">Home</a>
+        </li>
+		
+		   <li class="<?php echo active_link('dashboard'); ?>">
+          <a href="<?php echo base_url('ticket/dashboard');?>">Dashboard</a>
+        </li>
+				<li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tickets <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	           <li class="<?php echo active_link('ticket'); ?>"><a href="<?php echo base_url('ticket');?>">Tickets</a></li>
+			  <li><a href="<?php echo base_url('ticket/my_tickets'); ?>">My Tickets</a></li>
+			   <li><a href="<?php echo base_url('ticket/create'); ?>">Create a New Ticket</a></li>
+	          <li><a href="<?php echo base_url('ticket/assigned_tickets'); ?>">Assigned Tickets</a></li>
+	          <li><a href="<?php echo base_url('ticket/open_tickets'); ?>">Open Tickets</a></li>
+			  <li><a href="<?php echo base_url('ticket/pending_tickets'); ?>">Pending Tickets</a></li>
+	          <li><a href="<?php echo base_url('ticket/resolved_tickets'); ?>">Resolved Tickets</a></li>
+			  <li><a href="<?php echo base_url('ticket/closed_tickets'); ?>">Closed</a></li>
+	        </ul>
+	      </li>
+		  
+		  <li class="dropdown <?php echo active_link('customer'); ?>">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Customer <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	           <li class="<?php echo active_link('customer'); ?>"><a href="<?php echo base_url('customer');?>">Customer List</a></li>
+			  <li><a href="<?php echo base_url('customer_site'); ?>">Customer Sites</a></li>
+			   <li><a href="<?php echo base_url('customer_type'); ?>">Customer Type</a></li>
+	          <li><a href="<?php echo base_url('customer/customer_upload'); ?>">Upload Customer Data</a></li>
+	          
+	        </ul>
+	      </li>
+		  		  
+		    <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Product <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	           <li class="<?php echo active_link('ticket'); ?>"><a href="<?php echo base_url('serial');?>">Serial No</a></li>
+			  <li><a href="<?php echo base_url('serial');?>">Model</a></li>
+			   <li><a href="<?php echo base_url('serial'); ?>">Manufacturer</a></li>
+	          <li><a href="<?php echo base_url('serial/serial_upload');?>">Upload Serial Data</a></li>
+	          
+	        </ul>
+	      </li>
+		  
+		  
+		  	<li class="dropdown <?php echo active_link('staff'); ?>">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Staff <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	           <li class="<?php echo active_link('staff'); ?>"><a href="<?php echo base_url('staff');?>">Staff</a></li>
+			  <li class="<?php echo active_link('roles'); ?>"><a href="<?php echo base_url('roles');?>">Roles</a></li>
+			   <li class="<?php echo active_link('dept'); ?>"><a href="<?php echo base_url('dept'); ?>">Departments</a></li>
+	          <li class="<?php echo active_link('team'); ?>"><a href="<?php echo base_url('team');?>">Teams</a></li>
+	          <li class="<?php echo active_link('designation'); ?>"><a href="<?php echo base_url('designation');?>">Designation</a></li>
+	          <li class="<?php echo active_link('delegation'); ?>"><a href="<?php echo base_url('designation');?>">Delegation</a></li>
+	          
+	        </ul>
+	      </li>
+		  
+		  <li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Approvals <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	           <li class=""><a href="<?php echo base_url('ticket/my_approvals');?>">My Approvals</a></li>
+			  <li><a href="<?php echo base_url('ticket/pending_approvals');?>">Pending Approvals</a></li>
+			   <li><a href="<?php echo base_url('ticket/ticket_approvals'); ?>">Approved</a></li>
+	        
+	        </ul>
+	      </li>
+		
+		<li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	           <li><a href="<?php echo base_url('ticket_priority');?>">Ticket Priority</a></li>
+			  <li><a href="<?php echo base_url('ticket_status');?>">Ticket Status</a></li>
+			 <li><a href="<?php echo base_url('help_topic');?>">Ticket Type</a></li>
+			 
+	        </ul>
+	      </li>
+		
+		
+		  <!--
+		   <li>
+          <a href="<?php echo base_url('staff');?>">Settings</a>
+        </li>
+		
+		  
+		  	<li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tasks <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	           <li class="<?php echo active_link('ticket'); ?>"><a href="<?php echo base_url('ticket');?>">Tasks</a></li>
+			  <li><a href="#">My Task</a></li>
+			   <li><a href="<?php echo base_url('ticket/create'); ?>">Open a New Task</a></li>
+	          <li><a href="#">Assigned Task</a></li>
+	          <li><a href="#">Open Task</a></li>
+	          <li><a href="#">Pending Task</a></li>
+	          <li><a href="#">Closed</a></li>
+	        </ul>
+	      </li>
+		  
+       --> 	
+        
+     
+		
+		
+		<li class="dropdown">
+	        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	           <li><a href="<?php echo base_url('sla');?>">SLA</a></li>
+			  
+			  <li><a href="#">Email</a></li>
+			  <li><a href="<?php echo base_url('perms'); ?>" >Permissions</a> </li>
+			   <li><a href="<?php echo base_url('org');?>">Organization</a></li>
+			     <li><a href="<?php echo base_url('transport');?>">Transport</a></li>
+	        
+	        </ul>
+	      </li>
+		
+		
+		
+		
+			<li class="dropdown">
+			
+			<a href="#" class="dropdown-toggle " data-toggle="dropdown"><?php echo $this->session->userdata('email'); ?> <b class="caret"></b></a>
+	        
+			<ul class="dropdown-menu dropdown-menu-right">
+	        
+	          <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+	          <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+	          <li><a href="#"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
+	          <li><a href="<?php echo base_url('scp/logout'); ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+	          
+	        </ul>
+	      </li>
+		
+      </ul>
+	
+    </nav>
+  </div>
+</header>
+
+<div class="container" id="container">
+<div class="row">
+<div class="jumbotron" >
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-12">
+<?php 
+$seg2 = $this->uri->segment(2); 
+
+
+?>;
+					
+<ul class="nav nav-tabs">
+<li class="<?php echo ($seg2 == 'dashboard')? 'active' : ''; ?>"><a href="<?php echo base_url('ticket/dashboard'); ?>" >Dashboard</a> </li>
+<li class="<?php echo ($seg2 == 'open_tickets') ? 'active' : ''; ?>"><a href="<?php echo base_url('ticket/open_tickets'); ?>" >Open Tickets</a> </li>
+<li class="<?php echo ($seg2 == 'my_tickets')? 'active' : ''; ?>"><a href="<?php echo base_url('ticket/my_tickets'); ?>" >My Tickets</a> </li>
+<li class="<?php echo ($seg2 == 'assigned_tickets')? 'active' : ''; ?>"><a href="<?php echo base_url('ticket/assigned_tickets'); ?>" >Assigned Tickets</a> </li>
+<li class="<?php echo ($seg2 == 'pending_tickets')? 'active' : ''; ?>"><a href="<?php echo base_url('ticket/pending_tickets'); ?>" >Pending Tickets</a> </li>
+<li class="<?php echo ($seg2 == 'resolved_tickets')? 'active' : ''; ?>"><a href="<?php echo base_url('ticket/resolved_tickets'); ?>" >Resolved Tickets</a> </li>
+<li class="<?php echo ($seg2 == 'closed_tickets')? 'active' : ''; ?>"><a href="<?php echo base_url('ticket/closed_tickets'); ?>" >Closed Tickets</a> </li>
+
+</ul>
+
+
+
+
