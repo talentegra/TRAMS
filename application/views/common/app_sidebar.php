@@ -10,86 +10,86 @@
                     <li><a href="index3.html">Dashboard3</a></li>
                 </ul>
             </li>
-			
-			 <li><a><i class="fa fa-edit"></i> Leads <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-edit"></i> Leads <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                    <li><a href="index.html">Leads</a></li>
-                    <li><a href="index2.html">Follow-ups</a></li>
-					<li><a href="index3.html">Overdue Follow-ups</a></li>
-					<li><a href="index3.html">Processed Follow-ups</a></li>
-                    <li><a href="index3.html">Disqualifed Follow-ups</a></li>
+                    <li><a href="<?php echo base_url('leads/'); ?>">Leads</a></li>
+                    <li><a href="<?php echo base_url('followup_thread/'); ?>">Follow-ups</a></li>
+                    <li><a href="<?php echo base_url('followup_thread/overdue_list'); ?>">Overdue Follow-ups</a></li>
+                    <li><a href="<?php echo base_url('leads/processed'); ?>">Processed Leads</a></li>
+                    <li><a href="<?php echo base_url('leads/disqualified'); ?>">Disqualified Leads</a></li>
                 </ul>
             </li>
-			
-				 <li><a><i class="fa fa-edit"></i> Enquiry <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-edit"></i> Enquiry <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="index.html">Leads</a></li>
                     <li><a href="index2.html">Enquiry List</a></li>
-					<li><a href="index3.html">Pending Follow-ups</a></li>
-					<li><a href="index3.html">Overdue Follow-ups</a></li>
+                    <li><a href="index3.html">Pending Follow-ups</a></li>
+                    <li><a href="index3.html">Overdue Follow-ups</a></li>
                     <li><a href="index3.html">Disqualifed Follow-ups</a></li>
-					<li><a href="index3.html">Enrolled from Enquiry</a></li>
+                    <li><a href="index3.html">Enrolled from Enquiry</a></li>
                 </ul>
             </li>
-			
-				 <li><a><i class="fa fa-clone"></i> Admission <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-clone"></i> Admission <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="index.html">Enrolled Students</a></li>
                     <li><a href="index2.html">Alumini</a></li>
-				
+
                 </ul>
             </li>
-			
-				 <li><a><i class="fa fa-calculator"></i> Accounts <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-calculator"></i> Accounts <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="index.html">Outstanding Fees</a></li>
                     <li><a href="index2.html">Overdue Fees</a></li>
-					<li><a href="index3.html">Payable</a></li>
-					<li><a href="index3.html">Income</a></li>
+                    <li><a href="index3.html">Payable</a></li>
+                    <li><a href="index3.html">Income</a></li>
                     <li><a href="index3.html">Expenses</a></li>
-					
+
                 </ul>
             </li>
-			
-				 <li><a><i class="fa fa-calendar"></i> Timetable <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-calendar"></i> Timetable <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="index.html">Batches</a></li>
                     <li><a href="index2.html">Faculty Appointment</a></li>
-					<li><a href="index3.html">Mark Student Attendance</a></li>
-					<li><a href="index3.html">Mark Staff Attendance</a></li>
+                    <li><a href="index3.html">Mark Student Attendance</a></li>
+                    <li><a href="index3.html">Mark Staff Attendance</a></li>
                     <li><a href="index3.html"></a></li>
-					
+
                 </ul>
             </li>
-			
-			<li><a><i class="fa fa-calendar"></i> Feedback <span class="fa fa-chevron-down"></span></a>
+
+            <li><a><i class="fa fa-calendar"></i> Feedback <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="index.html">Batch Feedback</a></li>
                     <li><a href="index2.html">Faculty Feedback</a></li>
-					<li><a href="index3.html">Student Feedback</a></li>
-					<li><a href="index3.html">Branch Feedback</a></li>
+                    <li><a href="index3.html">Student Feedback</a></li>
+                    <li><a href="index3.html">Branch Feedback</a></li>
                     <li><a href="index3.html"></a></li>
-					
+
                 </ul>
             </li>
-			
-			
-			<li><a><i class="fa fa-calendar"></i> Report <span class="fa fa-chevron-down"></span></a>
+
+
+            <li><a><i class="fa fa-calendar"></i> Report <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="index.html">Batch Status</a></li>
                     <li><a href="index2.html">Income/Expenses</a></li>
-					<li><a href="index3.html">Enquiry Completed Follow-ups</a></li>
-					<li><a href="index3.html">Direct Admissions</a></li>
+                    <li><a href="index3.html">Enquiry Completed Follow-ups</a></li>
+                    <li><a href="index3.html">Direct Admissions</a></li>
                     <li><a href="index3.html">Conversion Summary</a></li>
-					
+
                 </ul>
             </li>
-        
+
             <li><a><i class="fa fa-clone"></i> Manage <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                     <li><a href="fixed_sidebar.html">Staff</a></li>
                     <li><a href="fixed_footer.html">Course</a></li>
-					 <li><a href="fixed_footer.html">Branch</a></li>
+                    <li><a href="fixed_footer.html">Branch</a></li>
                 </ul>
             </li>
         </ul>

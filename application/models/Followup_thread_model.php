@@ -3,7 +3,7 @@
 
 /* Location: ./application/models/Followup_thread_model.php */
 /* Derived from Harviacode  */
-/* Modified by Vivek Raghunathan 2016-06-21 15:49:23 */
+/* Modified by Vivek Raghunathan 2016-06-24 13:47:22 */
 /* Email : vivekra@dqserv.com */
 /* http://dqserv.com */
 
@@ -52,47 +52,64 @@ class Followup_thread_model extends CI_Model
     }
 	    
     // get total rows
-    function total_rows($q = NULL) {
-        $this->db->like('', $q);
-	$this->db->or_like('followup_id', $q);
-	$this->db->or_like('pid', $q);
-	$this->db->or_like('followup_type', $q);
-	$this->db->or_like('interest_level', $q);
-	$this->db->or_like('followup_date', $q);
-	$this->db->or_like('followup_action', $q);
-	$this->db->or_like('followup_comments', $q);
-	$this->db->or_like('next_followup_date', $q);
-	$this->db->or_like('next_followup_action', $q);
-	$this->db->or_like('staff_id', $q);
-	$this->db->or_like('status', $q);
-	$this->db->or_like('created', $q);
-	$this->db->or_like('updated', $q);
+    function total_rows($q = NULL,$type='') {
+    $this->db->select('followup_thread.*,CONCAT(leads.first_name, " ", leads.middle_name, " ", leads.last_name) as leads_name');
+	$this->db->join('leads', 'leads.lead_id=followup_thread.lead_id', 'LEFT');
+	$this->db->group_start();
+	$this->db->or_like('CONCAT(leads.first_name, " ", leads.middle_name, " ", leads.last_name)', $q);
+	$this->db->or_like('followup_thread.followup_type', $q);
+	$this->db->or_like('followup_thread.interest_level', $q);
+	$this->db->or_like('followup_thread.followup_date', $q);
+	$this->db->or_like('followup_thread.followup_action', $q);
+	$this->db->or_like('followup_thread.followup_comments', $q);
+	$this->db->or_like('followup_thread.next_followup_date', $q);
+	$this->db->or_like('followup_thread.next_followup_action', $q);
+	$this->db->or_like('followup_thread.staff_id', $q);
+	$this->db->or_like('followup_thread.status', $q);
+	$this->db->group_end();
+	
+	if($type=='overdue'){
+		$this->db->where('DATE(followup_thread.followup_date) < DATE(NOW())', null);
+	}
 	$this->db->from($this->table);
         return $this->db->count_all_results();
     }
 
     // get data with limit and search
-    function get_limit_data($limit, $start = 0, $sort_column = '',$sort_by = '',$q = NULL) {
+    function get_limit_data($limit, $start = 0, $sort_column = '',$sort_by = '',$q = NULL,$type='') {
+	$this->db->select('followup_thread.*,CONCAT(leads.first_name, " ", leads.middle_name, " ", leads.last_name) as leads_name,
+						interest_level.interest_level as interest_level_name,followup_action.followup_action as followup_action_name,
+						next_followup_action.followup_action as next_followup_action_name,
+						CONCAT(staff_details.firstname, " ", staff_details.lastname) as staff_name');
+	$this->db->join('leads', 'leads.lead_id=followup_thread.lead_id', 'LEFT');
+	$this->db->join('interest_level', 'interest_level.interest_level_id=followup_thread.interest_level', 'LEFT');
+	$this->db->join('followup_action', 'followup_action.followup_action_id=followup_thread.followup_action', 'LEFT');
+	$this->db->join('followup_action as next_followup_action', 'next_followup_action.followup_action_id=followup_thread.next_followup_action', 'LEFT');
+	$this->db->join('staff_details', 'staff_details.staff_id=followup_thread.staff_id', 'LEFT');
+	
 		if($sort_column!='' && $sort_by!= '' ){
             $this->db->order_by($sort_column, $sort_by);
         }
 		else { 
         $this->db->order_by($this->id, $this->order);
 		}
-        $this->db->like('', $q);
-	$this->db->or_like('followup_id', $q);
-	$this->db->or_like('pid', $q);
-	$this->db->or_like('followup_type', $q);
-	$this->db->or_like('interest_level', $q);
-	$this->db->or_like('followup_date', $q);
-	$this->db->or_like('followup_action', $q);
-	$this->db->or_like('followup_comments', $q);
-	$this->db->or_like('next_followup_date', $q);
-	$this->db->or_like('next_followup_action', $q);
-	$this->db->or_like('staff_id', $q);
-	$this->db->or_like('status', $q);
-	$this->db->or_like('created', $q);
-	$this->db->or_like('updated', $q);
+	$this->db->group_start();
+	$this->db->or_like('CONCAT(leads.first_name, " ", leads.middle_name, " ", leads.last_name)', $q);
+	$this->db->or_like('followup_thread.followup_type', $q);
+	$this->db->or_like('interest_level.interest_level', $q);
+	$this->db->or_like('followup_thread.followup_date', $q);
+	$this->db->or_like('followup_action.followup_action', $q);
+	$this->db->or_like('followup_thread.followup_comments', $q);
+	$this->db->or_like('followup_thread.next_followup_date', $q);
+	$this->db->or_like('next_followup_action.followup_action', $q);
+	$this->db->or_like('followup_thread.staff_id', $q);
+	$this->db->or_like('followup_thread.status', $q);
+	$this->db->group_end();
+	
+	if($type=='overdue'){
+		$this->db->where('DATE(followup_thread.followup_date) < DATE(NOW())', null);
+	}
+	
 	$this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
@@ -115,6 +132,17 @@ class Followup_thread_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+	
+	// check_exist
+    function check_exist($val,$col,$id)
+    {
+        $this->db->where($col, $val);
+		if($id){
+		$this->db->where($this->id.' !=', $id);
+		}
+        $this->db->from($this->table);
+        return $this->db->count_all_results();
     }
 
 }
